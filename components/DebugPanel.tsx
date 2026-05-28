@@ -109,8 +109,7 @@ export default function DebugPanel() {
     ) {
       this.__wx_method = String(method).toUpperCase();
       this.__wx_url = typeof url === "string" ? url : url.href;
-      // @ts-expect-error pass-through to original signature
-      return origOpen.call(this, method, url, ...rest);
+      return (origOpen as (...a: unknown[]) => void).call(this, method, url, ...rest);
     };
     XHR.prototype.send = function (this: PatchedXHR, body?: Document | XMLHttpRequestBodyInit | null) {
       const method = this.__wx_method || "GET";
@@ -123,7 +122,6 @@ export default function DebugPanel() {
           push("net", `← xhr ${method} ${url}  ${this.status} ${this.statusText}`);
         }
       });
-      // @ts-expect-error pass-through to original signature
       return origSend.call(this, body);
     };
 
