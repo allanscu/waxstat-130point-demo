@@ -1,4 +1,5 @@
 import WaxstatWidget from "@/components/WaxstatWidget";
+import pkg from "@/package.json";
 
 type FeatureCard = {
   id: string;
@@ -218,7 +219,10 @@ export default function Home() {
       <footer className="site-footer">
         <div className="max-w-6xl mx-auto px-6 py-6 flex flex-wrap items-center justify-between gap-3">
           <span>Demo site · embeds the Waxstat releases widget · not affiliated with 130point.com</span>
-          <span>© {new Date().getFullYear()} CCcomps demo</span>
+          <span>
+            © {new Date().getFullYear()} CCcomps demo
+            <span style={{ marginLeft: 12, opacity: 0.7 }}>v{pkg.version}</span>
+          </span>
         </div>
       </footer>
     </main>
